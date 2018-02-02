@@ -3,11 +3,15 @@
 }
 
 .jumbotron .photo{
-    margin: 5px;
+
 }
 
 .jumbotron{
     display: flex;
+}
+
+.jumbotron .text{
+    margin-top: 10px;
 }
 
 .container h1{
