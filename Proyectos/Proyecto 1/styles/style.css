@@ -1,3 +1,10 @@
+body{
+    background-image: url("/images/tikal.jpg");
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 .title{
     font-family: 'Russo One', sans-serif;
     font-size: 30px;
@@ -22,4 +29,33 @@
     margin: auto;
     align-items: center;
     text-align: justify;
+}
+
+.jumbotron{
+    background: rgba(0,0,0,0.5);
+    margin: 1.5em;
+    padding-bottom: 1em;
+}
+
+#name-header{
+    color: rgb(150,150,150);
+    font-family: 'Russo One', sans-serif;
+    padding-top: 1em;
+}
+
+#name-sub-header{
+    font-family: 'Russo One', sans-serif;
+    font-style: italic;
+    color: rgb(170,170,170);
+}
+
+.image-title{
+    border-radius: 50%;
+    height: 20em;
+    width: 20em;
+    margin: auto;
+}
+
+.center-items{
+    text-align: center;
 }
