@@ -8,12 +8,25 @@
 
 .jumbotron{
     display: flex;
+
+}
+
+#tweets{
+
+}
+
+.card{
+    padding: 5px;
 }
 
 .jumbotron .text{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .container h1{
     margin: 5px;
+}
+
+.one-tweet{
+    padding: 2em;
 }

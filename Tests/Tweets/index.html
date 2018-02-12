@@ -17,117 +17,80 @@
         </div>
     </div>
 </header>
-<section class="jumbotron">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="photo">
-                        <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
-                             class="rounded-circle"/>
-                    </div>
-                </div>
-                <div class="col-sm-10">
-                    <row>
-                        <div class="col-sm">
-                            <div class="name">
-                                Nicolas Cabrer
-                            </div>
-                        </div>
-                    </row>
-                    <row>
-                        <div class="col-sm">
-                            <div class="date">
-                                Wed Jan 31 23:07:16 +0000 2018
-                            </div>
-                        </div>
-                    </row>
-                </div>
-            </div>
-            <row>
-                <div class="col-sm">
-                    <div class="text">The Bootstrap grid is extremely useful when building responsive websites. It lets
-                        you
-                        stack
-                        your
-                        grids differently… https://t.co/1CxaY6bsE0
-                    </div>
-                </div>
-            </row>
-        </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="photo">
-                        <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
-                             class="rounded-circle"/>
-                    </div>
-                </div>
-                <div class="col-sm-10">
-                    <row>
-                        <div class="col-sm">
-                            <div class="name">
-                                Nicolas Cabrer
-                            </div>
-                        </div>
-                    </row>
-                    <row>
-                        <div class="col-sm">
-                            <div class="date">
-                                Wed Jan 31 23:07:16 +0000 2018
-                            </div>
-                        </div>
-                    </row>
-                </div>
-            </div>
-            <row>
-                <div class="col-sm">
-                    <div class="text">The Bootstrap grid is extremely useful when building responsive websites. It lets
-                        you
-                        stack
-                        your
-                        grids differently… https://t.co/1CxaY6bsE0
-                    </div>
-                </div>
-            </row>
-        </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="photo">
-                        <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
-                             class="rounded-circle"/>
-                    </div>
-                </div>
-                <div class="col-sm-10">
-                    <row>
-                        <div class="col-sm">
-                            <div class="name">
-                                Nicolas Cabrer
-                            </div>
-                        </div>
-                    </row>
-                    <row>
-                        <div class="col-sm">
-                            <div class="date">
-                                Wed Jan 31 23:07:16 +0000 2018
-                            </div>
-                        </div>
-                    </row>
-                </div>
-            </div>
-            <row>
-                <div class="col-sm">
-                    <div class="text">The Bootstrap grid is extremely useful when building responsive websites. It lets
-                        you
-                        stack
-                        your
-                        grids differently… https://t.co/1CxaY6bsE0
-                    </div>
-                </div>
-            </row>
+<div class="container">
+    <div class="row justify-content-around">
+        <div class="col-sm">
+            <input type="text"
+                   id="inputSearch"
+                   placeholder="Search by name"/>
+            <button class="btn btn-primary"
+                    id="btnSearch"
+            >Search
+            </button>
         </div>
     </div>
+</div>
+<section class="jumbotron">
+
+    <div id="tweets" class="row">
+
+    </div>
 </section>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    "use strict";
+
+    function update(data, filter) {
+        $("#tweets").empty();
+        data.filter(function (d) {
+            return d.user.screen_name.startsWith(filter);
+        }).forEach(function(d){
+            var photo = $("<img class='img-responsibe rounded-circle'>")
+                .addClass("photo")
+                .attr("src", d.user.profile_image_url)
+                .attr("alt", d.user.screen_name + " photo");
+
+            var tweet = $("<div class='col-sm-3 one-tweet card'>")
+                .append($("<div class='row'>")
+                    .append($("<div class='col-sm-2'>")
+                        .append(photo)
+                    ).append($("<div class='col-sm-10'>")
+                        .append($("<div class='row'>")
+                            .append($("<div class='col'>")
+                                .text(d.user.screen_name)))
+                        .append($("<div class='row'>")
+                            .append($("<div class='col'>")
+                                .text(d.user.created_at)))
+
+                    ))
+                .append($("<div class='row'>")
+                    .append($("<div class='col-sm'>")
+                        .text(d.text)));
+            $("#tweets").append(tweet);
+        })
+    }
+
+    function callback(data) {
+        console.log("callback");
+        console.log(data);
+
+        update(data, "");
+
+        $("#btnSearch")
+            .on("click", function () {
+                update(data, $("#inputSearch").val());
+            });
+
+
+    }
+
+    console.log("before");
+    var tweets = $.getJSON("files/web_dev_data.json", callback);
+    console.log("aftere");
+</script>
+
 </body>
 </html>
